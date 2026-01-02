@@ -1,0 +1,167 @@
+---
+title: Week 1 - Introduction to Cloud Computing
+description: An introduction to cloud computing concepts, AWS infrastructure, and service models
+---
+
+# Practical Cloud Computing with AWS
+
+## Week One
+
+Welcome to Week 1 of Practical Cloud Computing with AWS! This week, we'll introduce you to the fundamentals of cloud computing and AWS.
+
+---
+
+## What is Cloud Computing?
+
+**Cloud Computing** is the delivery of computing services over the internet, enabling faster innovation, flexible resources, and economies of scale.
+
+Cloud computing encompasses several key areas:
+
+- **Compute** - Processing power and virtual machines
+- **Networking** - Connectivity and network infrastructure
+- **Storage** - Data storage and retrieval services
+
+---
+
+## Benefits of Cloud Computing
+
+Cloud computing offers several key advantages:
+
+- **On Demand self-service**: Users can provision computing services at will by interacting with cloud providers
+- **Elasticity**: Computing power and services can be automatically provisioned to scale proportionally with demand
+- **Reliability**: The services that live on "the cloud" are designed to have an uptime of 99% to 99.9%
+- **Less maintenance**: Only pay for what you need without needing to manage the physical infrastructure
+
+---
+
+## Shared Responsibility Model
+
+AWS operates on a shared responsibility model that divides security responsibilities between AWS and the customer:
+
+### Customer Responsibility (Security 'IN' the Cloud)
+
+- **Customer Data**
+- **Platform, Applications, Identity & Access Management**
+- **Operating System, Network & Firewall Configuration**
+- **Client-side Data Encryption & Data Integrity Authentication**
+- **Server-side Encryption** (File System and/or Data)
+- **Networking Traffic Protection** (Encryption, Integrity, Identity)
+
+### AWS Responsibility (Security 'OF' the Cloud)
+
+- **Software**
+- **Compute**
+- **Storage**
+- **Database**
+- **Networking**
+- **Hardware/AWS Global Infrastructure**
+- **Regions**
+- **Availability Zones**
+- **Edge Locations**
+
+---
+
+## What are IaaS, SaaS, and PaaS?
+
+There are three main service models in cloud computing:
+
+### Infrastructure as a Service (IaaS)
+
+Renting servers and virtual machines (VM), storage, networks, etc. from a cloud provider. You manage applications, databases, security, and operating systems, while the provider manages virtualization, servers, storage, networking, and data centers.
+
+### Platform as a Service (PaaS)
+
+Allows developers to build applications and deploy them without worrying about configuring infrastructure. Examples include Firebase, Vercel, and Heroku. You manage applications and data, while the provider manages everything else from the operating system down.
+
+### Software as a Service (SaaS)
+
+Packages of software that function for a specific purpose such as Gmail or ChatGPT. You only need to manage your data and users; the provider manages everything else.
+
+### Breakdown of Responsibility
+
+| Component         | Enterprise IT | IaaS       | PaaS       | SaaS       |
+| ----------------- | ------------- | ---------- | ---------- | ---------- |
+| Applications      | ☐ Customer    | ☐ Customer | ☐ Customer | ☐ Customer |
+| Databases         | ☐ Customer    | ☐ Customer | ☐ Customer | ☐ Customer |
+| Security          | ☐ Customer    | ☐ Customer | ☐ Customer | ☐ Customer |
+| Operating Systems | ☐ Customer    | ☐ Customer | ☐ Provider | ☐ Provider |
+| Virtualization    | ☐ Customer    | ☐ Provider | ☐ Provider | ☐ Provider |
+| Servers           | ☐ Customer    | ☐ Provider | ☐ Provider | ☐ Provider |
+| Storage           | ☐ Customer    | ☐ Provider | ☐ Provider | ☐ Provider |
+| Networking        | ☐ Customer    | ☐ Provider | ☐ Provider | ☐ Provider |
+| Data Centers      | ☐ Customer    | ☐ Provider | ☐ Provider | ☐ Provider |
+
+**☐ Customer Managed** | **☐ Provider Managed**
+
+---
+
+## Public Cloud vs Private Cloud
+
+### Public Cloud
+
+Cloud infrastructure provisioned for public use by third parties such as AWS, GCP, and Azure. Multiple organizations share the same infrastructure, managed by the cloud provider.
+
+### Private Cloud
+
+Infrastructure provisioned for the use of one dedicated customer. They may manage or operate it with the help of a third party. Provides more control and customization but requires more management.
+
+---
+
+## AWS Global Infrastructure
+
+AWS's global infrastructure is designed for high availability and low latency:
+
+### Regions
+
+The largest measure of a geographical area for a cloud provider. A specific area such as the US northeast or even an entire country such as the UK. Examples include `us-east-1`, `us-west-2`, `eu-west-1`, etc.
+
+- Each region is a separate geographic area
+- Regions are completely independent
+- Most AWS services are region-scoped
+
+### Availability Zones
+
+They specifically perform fault tolerance within regions (e.g., `az-1`, `az-2`, etc.). Each region contains multiple isolated Availability Zones.
+
+- Each AZ is one or more discrete data centers
+- AZs are physically separated within a region
+- Connected through low-latency links
+- Designed for fault isolation
+
+### Edge Locations
+
+Points of Presence (PoPs) that cache data in densely populated locations to improve end-user experience. They are part of AWS CloudFront's content delivery network.
+
+- Distributed globally
+- Used for caching content
+- Improve performance for end users
+- Separate from Regions and Availability Zones
+
+> **Video Resource**: Watch the [Intro to AWS Global Infrastructure](https://www.youtube.com/watch?v=3hLmDS179YE) video for a visual explanation of these concepts.
+
+---
+
+## Next Class Preview
+
+In Week 2, we'll cover:
+
+- IAM users, groups, roles, and policies
+- Multi-Factor Authentication (MFA)
+- Best practices for securing AWS accounts
+- AWS Organizations
+
+---
+
+## Key Takeaways
+
+1. Cloud computing delivers computing services over the internet, providing flexibility and scalability
+2. The shared responsibility model divides security duties between AWS and customers
+3. Service models (IaaS, PaaS, SaaS) offer different levels of abstraction and management
+4. AWS global infrastructure includes Regions, Availability Zones, and Edge Locations for high availability and performance
+
+---
+
+## Additional Resources
+<Cards>
+  <Card title="AWS Page" href="/docs/week-1"/>
+</Cards>

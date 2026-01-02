@@ -1,0 +1,201 @@
+---
+title: Week 3 - AWS Compute Services
+description: Introduction to AWS compute services including EC2, instance types, and auto-scaling
+---
+
+# Practical Cloud Computing with AWS
+
+## Week Three
+
+This week introduces AWS compute services, focusing on Elastic Compute Cloud (EC2) - the foundation of compute in AWS.
+
+---
+
+## What is EC2?
+
+**Elastic Compute Cloud (EC2)** is a web service that provides resizable compute capacity in the cloud. It allows you to launch virtual servers (instances) on demand, configure security and networking, and manage storage.
+
+### Key Benefits
+
+- **Elastic**: Scale capacity up or down based on demand
+- **Flexible**: Choose instance types, operating systems, and software
+- **Cost-effective**: Pay only for what you use
+- **Secure**: Built-in security features and network isolation
+
+---
+
+## EC2 Instance Types
+
+EC2 instances are optimized for different use cases. Instance types are named based on their family, generation, and size.
+
+### Instance Families
+
+- **General Purpose**: Balanced compute, memory, and networking (t3, t4g, m5, m6i)
+- **Compute Optimized**: High-performance processors (c5, c6i)
+- **Memory Optimized**: High memory-to-vCPU ratio (r5, r6i, x1e)
+- **Storage Optimized**: High, sequential read/write access (i3, d2)
+- **Accelerated Computing**: Hardware accelerators (p3, p4, g4)
+
+### Instance Naming Convention
+
+Example: `m5.large`
+
+- **m** = Instance family (General Purpose)
+- **5** = Generation
+- **large** = Instance size
+
+---
+
+## Amazon Machine Images (AMIs)
+
+An **AMI** is a template that contains the software configuration (operating system, application server, and applications) required to launch an instance.
+
+### AMI Types
+
+- **Public AMIs**: Provided by AWS or the community
+- **Private AMIs**: Your own custom AMIs
+- **AWS Marketplace AMIs**: Pre-configured software stacks
+
+### AMI Components
+
+- Root volume template (OS, applications)
+- Launch permissions
+- Block device mapping
+
+---
+
+## Security Groups
+
+**Security Groups** act as virtual firewalls for your EC2 instances, controlling inbound and outbound traffic.
+
+### Key Features
+
+- **Stateful**: If you allow inbound traffic, outbound traffic is automatically allowed
+- **Default Deny**: All inbound traffic is denied by default
+- **Multiple Rules**: Can have multiple rules per security group
+- **Multiple Groups**: Instances can belong to multiple security groups
+
+### Common Rules
+
+- **SSH (Port 22)**: For Linux instances
+- **RDP (Port 3389)**: For Windows instances
+- **HTTP (Port 80)**: For web traffic
+- **HTTPS (Port 443)**: For secure web traffic
+
+---
+
+## Key Pairs
+
+**Key Pairs** are used to securely connect to your EC2 instances.
+
+### How It Works
+
+1. Create a key pair in AWS (or import your own)
+2. AWS stores the public key
+3. You download and securely store the private key
+4. Use the private key to SSH into Linux instances or decrypt Windows passwords
+
+### Best Practices
+
+- Never share your private key
+- Use different key pairs for different environments
+- Rotate keys regularly
+- Store private keys securely
+
+---
+
+## EC2 Instance Lifecycle
+
+Understanding the instance lifecycle helps you manage costs and availability.
+
+### Instance States
+
+- **Pending**: Instance is being launched
+- **Running**: Instance is running and ready to use
+- **Stopping**: Instance is being stopped
+- **Stopped**: Instance is stopped (you're charged for storage)
+- **Shutting-down**: Instance is being terminated
+- **Terminated**: Instance is permanently deleted
+
+### Stop vs Terminate
+
+- **Stop**: Instance can be restarted later (data on EBS volumes is preserved)
+- **Terminate**: Instance is permanently deleted (default EBS volumes are deleted)
+
+---
+
+## Elastic IP Addresses
+
+An **Elastic IP** is a static, public IPv4 address designed for dynamic cloud computing.
+
+### Use Cases
+
+- When you need a persistent public IP
+- When you need to mask instance failures
+- For applications that require a stable IP
+
+### Important Notes
+
+- Elastic IPs are free when attached to running instances
+- You're charged if an Elastic IP is not attached to a running instance
+- Limit of 5 Elastic IPs per region by default
+
+---
+
+## EC2 Placement Groups
+
+Placement groups influence the placement of instances to meet specific requirements.
+
+### Types
+
+1. **Cluster**: Low latency, high throughput (same AZ)
+2. **Spread**: Reduces risk of simultaneous failures (different hardware)
+3. **Partition**: For large distributed and replicated workloads
+
+---
+
+## EC2 Auto Scaling
+
+**Auto Scaling** helps you maintain application availability and scale capacity automatically.
+
+### Benefits
+
+- **Availability**: Automatically replace unhealthy instances
+- **Cost Optimization**: Scale down during low demand
+- **Performance**: Scale up during high demand
+
+### Components
+
+- **Launch Template/Configuration**: Defines what to launch
+- **Auto Scaling Group**: Defines where and how many
+- **Scaling Policies**: Defines when to scale
+
+---
+
+## EC2 Best Practices
+
+1. **Right-size instances**: Choose appropriate instance types
+2. **Use Reserved Instances**: For predictable workloads (save up to 75%)
+3. **Enable CloudWatch**: Monitor instance performance
+4. **Use Security Groups**: Control network access
+5. **Tag instances**: For organization and cost tracking
+6. **Use IAM roles**: Instead of storing credentials on instances
+7. **Regular backups**: Use snapshots for EBS volumes
+
+---
+
+## Next Class Preview
+
+In Week 4, we'll cover AWS storage services including S3, EBS, and EFS.
+
+---
+
+## Key Takeaways
+
+1. EC2 provides scalable compute capacity in the cloud
+2. Instance types are optimized for different workloads
+3. AMIs are templates for launching instances
+4. Security groups act as virtual firewalls
+5. Key pairs enable secure access to instances
+6. Auto Scaling helps maintain availability and optimize costs
+7. Understanding instance lifecycle is crucial for cost management

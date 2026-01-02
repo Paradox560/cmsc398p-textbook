@@ -1,0 +1,205 @@
+---
+title: Week 4 - AWS Storage Services
+description: Introduction to AWS storage services including S3, EBS, and EFS
+---
+
+# Practical Cloud Computing with AWS
+
+## Week Four
+
+This week covers AWS storage services, with a focus on Simple Storage Service (S3), Elastic Block Store (EBS), and Elastic File System (EFS).
+
+---
+
+## AWS Storage Services Overview
+
+AWS offers multiple storage services optimized for different use cases:
+
+- **S3**: Object storage for any amount of data
+- **EBS**: Block storage for EC2 instances
+- **EFS**: Managed file storage for EC2 instances
+- **Storage Gateway**: Hybrid cloud storage
+
+---
+
+## Amazon S3 (Simple Storage Service)
+
+S3 is object storage built to store and retrieve any amount of data from anywhere.
+
+### Key Features
+
+- **Durability**: 99.999999999% (11 9's) durability
+- **Availability**: 99.99% availability
+- **Scalability**: Virtually unlimited storage
+- **Security**: Encryption at rest and in transit
+- **Cost-effective**: Pay only for what you use
+
+### S3 Concepts
+
+- **Buckets**: Containers for objects (like folders)
+- **Objects**: Files stored in buckets
+- **Keys**: Unique identifier for objects (like file path)
+- **Regions**: Buckets are created in specific regions
+
+### S3 Storage Classes
+
+| Storage Class                     | Use Case                                 | Durability    | Availability |
+| --------------------------------- | ---------------------------------------- | ------------- | ------------ |
+| **S3 Standard**                   | Frequently accessed data                 | 99.999999999% | 99.99%       |
+| **S3 Intelligent-Tiering**        | Unknown or changing access patterns      | 99.999999999% | 99.9%        |
+| **S3 Standard-IA**                | Infrequently accessed data               | 99.999999999% | 99.9%        |
+| **S3 One Zone-IA**                | Infrequently accessed, non-critical data | 99.5%         | 99.5%        |
+| **S3 Glacier Instant Retrieval**  | Archive with instant access              | 99.999999999% | 99.9%        |
+| **S3 Glacier Flexible Retrieval** | Archive with retrieval in minutes        | 99.999999999% | 99.99%       |
+| **S3 Glacier Deep Archive**       | Long-term archive                        | 99.999999999% | 99.99%       |
+
+### S3 Versioning
+
+**Versioning** keeps multiple versions of an object in the same bucket.
+
+- **Benefits**: Recover from accidental deletions or overwrites
+- **Enabled at bucket level**: Applies to all objects
+- **Each version has unique ID**: Can restore any version
+
+### S3 Lifecycle Policies
+
+Automatically transition objects between storage classes or delete them.
+
+**Common Transitions:**
+
+- Move to Standard-IA after 30 days
+- Move to Glacier after 90 days
+- Delete after 365 days
+
+### S3 Security
+
+- **Access Control**: Bucket policies, ACLs, IAM policies
+- **Encryption**: Server-side encryption (SSE-S3, SSE-KMS, SSE-C)
+- **MFA Delete**: Require MFA to delete objects
+- **Access Logging**: Track access requests
+
+### S3 Transfer Acceleration
+
+Uses CloudFront edge locations to accelerate uploads to S3.
+
+- **Benefits**: Faster uploads from anywhere in the world
+- **Use Case**: Large file uploads from distant locations
+
+---
+
+## Amazon EBS (Elastic Block Store)
+
+EBS provides persistent block storage volumes for use with EC2 instances.
+
+### Key Features
+
+- **Persistent**: Data persists independently of instance lifecycle
+- **High Performance**: Low-latency, high-throughput storage
+- **Scalable**: Resize volumes on the fly
+- **Backup**: Create snapshots for backup and disaster recovery
+
+### EBS Volume Types
+
+| Volume Type | Use Case                       | Max IOPS | Max Throughput |
+| ----------- | ------------------------------ | -------- | -------------- |
+| **gp3**     | General purpose (latest)       | 16,000   | 1,000 MB/s     |
+| **gp2**     | General purpose                | 16,000   | 250 MB/s       |
+| **io1**     | High-performance IOPS          | 64,000   | 4,000 MB/s     |
+| **io2**     | High-performance IOPS (latest) | 256,000  | 4,000 MB/s     |
+| **st1**     | Throughput-optimized           | 500      | 500 MB/s       |
+| **sc1**     | Cold HDD                       | 250      | 250 MB/s       |
+
+### EBS Snapshots
+
+**Snapshots** are point-in-time backups of EBS volumes.
+
+- **Incremental**: Only changed blocks are saved
+- **Regional**: Snapshots are stored in S3 (region-specific)
+- **Encrypted**: Can encrypt snapshots
+- **Copy**: Can copy snapshots across regions
+
+### EBS Best Practices
+
+1. **Right-size volumes**: Match volume type to workload
+2. **Use gp3**: Latest generation for cost savings
+3. **Enable encryption**: For sensitive data
+4. **Regular snapshots**: For backup and disaster recovery
+5. **Monitor performance**: Use CloudWatch metrics
+
+---
+
+## Amazon EFS (Elastic File System)
+
+EFS provides a simple, scalable, fully managed file system for use with AWS Cloud services and on-premises resources.
+
+### Key Features
+
+- **Fully Managed**: No file server management
+- **Scalable**: Automatically grows and shrinks
+- **Shared Storage**: Multiple EC2 instances can access simultaneously
+- **NFS Compatible**: Works with standard NFS clients
+
+### EFS Performance Modes
+
+- **General Purpose**: Low latency for most workloads
+- **Max I/O**: Higher latency, higher throughput
+
+### EFS Throughput Modes
+
+- **Bursting**: Baseline throughput scales with file system size
+- **Provisioned**: Set throughput independently of size
+
+### EFS Storage Classes
+
+- **Standard**: Frequently accessed files
+- **Infrequent Access (EFS-IA)**: Cost-optimized for files not accessed every day
+
+### Use Cases
+
+- Content management systems
+- Web serving
+- Application development and testing
+- Big data analytics
+- Media processing workflows
+
+---
+
+## S3 vs EBS vs EFS
+
+| Feature         | S3                                 | EBS                     | EFS                 |
+| --------------- | ---------------------------------- | ----------------------- | ------------------- |
+| **Type**        | Object Storage                     | Block Storage           | File Storage        |
+| **Access**      | REST API                           | Mounted as device       | NFS mount           |
+| **Durability**  | 99.999999999%                      | 99.8-99.9%              | 99.999999999%       |
+| **Use Case**    | Backup, static websites, data lake | Boot volumes, databases | Shared file systems |
+| **Scalability** | Unlimited                          | Up to 16 TiB per volume | Petabyte scale      |
+
+---
+
+## Storage Best Practices
+
+1. **Choose the right service**: Match storage type to use case
+2. **Enable versioning**: For S3 buckets with critical data
+3. **Use lifecycle policies**: Automate data management
+4. **Encrypt data**: At rest and in transit
+5. **Regular backups**: Use snapshots for EBS, versioning for S3
+6. **Monitor costs**: Use appropriate storage classes
+7. **Tag resources**: For cost allocation and management
+
+---
+
+## Next Class Preview
+
+In Week 5, we'll cover AWS databases.
+
+---
+
+## Key Takeaways
+
+1. S3 provides object storage with high durability and availability
+2. Different S3 storage classes optimize for cost and access patterns
+3. EBS provides persistent block storage for EC2 instances
+4. EFS provides shared file storage for multiple EC2 instances
+5. Versioning and lifecycle policies help manage S3 data
+6. Snapshots provide backup and disaster recovery for EBS
+7. Choose the right storage service based on your use case

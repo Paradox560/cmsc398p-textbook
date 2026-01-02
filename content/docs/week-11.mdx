@@ -1,0 +1,176 @@
+---
+title: Week 11 - Global Architecture
+description: Learn about CloudFormation, Beanstalk, CloudFront, Amplify, Global Accelerator, and messaging services
+---
+
+# Practical Cloud Computing with AWS
+
+## Week Eleven - Global Architecture
+
+This week covers tools and services for building global, scalable architectures on AWS.
+
+---
+
+## Overview of the Tools
+
+This week covers:
+
+- AWS CloudFormation
+- AWS Beanstalk
+- AWS CloudFront
+- AWS Amplify
+- AWS Global Accelerator
+- AWS Outposts
+- AWS SQS & SNS
+- AWS Kinesis
+- AWS Data Firehose
+
+---
+
+## AWS CloudFront
+
+Taking the concept of caching, CloudFront improves data read performance by caching content at edge locations.
+
+### Key Features
+
+- **100s of Points of Presence (edge locations)**: Distributed globally
+- **Automatic connection to AWS Shield & WAF**: Built-in DDoS protection
+- **Popular backend links**: S3 Storage, Load Balancers, EC2 Instances, Custom HTTP site
+- **Great for static content**: That needs to be low latency for regions globally
+- **S3 Transfer Acceleration**: Data to S3 can be faster through edge locations (uses CloudFront network distribution)
+- **Generally for**: Images, videos, websites (reason for using S3)
+
+---
+
+## AWS Global Accelerator
+
+Uses the AWS Global Network to improve application availability and performance.
+
+### Key Features
+
+- **Optimizes networking path**: To application (60% improvement)
+- **Similar to CloudFront**: Uses edge locations to make small efficient "jumps"
+- **Unlike CloudFront**: However, it doesn't use caching
+- **Uses TCP or UDP**: For the underlying layer 4 protocol
+- **Good for**: HTTP use cases that require static IP addresses or fast regional failover
+
+---
+
+## AWS Elastic Beanstalk
+
+Example of Platform as a Service (PaaS) in AWS.
+
+### Key Features
+
+- **Abstract the underlying infrastructure**: Only worry about code, similar to AWS Lambda
+- **Have control of configuration**: Of which type of cloud deployment you want
+
+### Three Architectural Models
+
+1. **Single Instance**: Good for development environments
+2. **Load Balancer + Auto Scaling Groups**: Great for production/pre-production web apps
+3. **Auto Scaling Groups**: Great for non-web apps in production
+
+**Health Monitoring**: Can be enabled in CloudWatch
+
+---
+
+## AWS CloudFormation
+
+A structured document outlining the resources you want deployed in your infrastructure.
+
+### Key Features
+
+- **In a template**: You can choose to specify EC2 instances, VPC policies, S3 buckets, etc.
+- **Executed in top-bottom order**: Exactly as written in the template configuration
+- **Infrastructure as Code (IaC)**: CloudFormation is an example of Infrastructure as Code
+- **Very similar to**: Products such as Terraform and Pulumi
+- **Automation**: Can be enabled to see certain stacks deployed on a schedule
+- **Resource management**: Resources created immediately from a configuration can be deleted from the CloudFormation all together at once
+- **Infrastructure Composer**: Can be used to see all the resources and the relations between the components
+
+---
+
+## AWS SQS & SNS
+
+### Simple Queue Service (SQS)
+
+Fully managed (serverless) queue meant to decouple applications.
+
+**Features:**
+
+- **Consumers**: Can be AWS Lambda, EC2, any compute read messages in FIFO queue
+- **Scaled Horizontally**: From 1 message per second to 10,000s per second & Low latency (< 10 ms on publish and receive)
+- **Default retention**: Of messages: 4 days, maximum of 14 days
+- **No limit**: To how many messages can be in the queue
+
+### Simple Notification Service (SNS)
+
+"Event Publishers" send messages to one SNS topic.
+
+**Features:**
+
+- **Each SNS topic has subscribers**: Which will receive any new notification
+- **Up to 12,500,000 subscriptions**: Per topic, 100,000 topics limit
+- **Pub/Sub model**: Publishers don't need to know about subscribers
+
+---
+
+## AWS Amplify
+
+Essentially: It is Amazon's version of Firebase.
+
+### Key Features
+
+- **Backend as a Service (BaaS)**: A suite of services to handle all things backend
+- **For user authentication**: AWS Amplify Cognito
+- **For databases**: AWS AppSync with DynamoDB for Amplify
+- **Handles**: API procurement & Hosting for web and mobile applications
+- **Handles**: AI/ML, Monitoring, CI/CD, and anything else you would possibly need
+
+---
+
+## AWS Kinesis
+
+Ingest, buffer, and process streaming data in real time to derive insights in minutes.
+
+### Key Features
+
+- **Fully managed**: By AWS and runs on serverless architecture
+- **Handles streaming data**: From thousands of sources and processes it with low latency
+
+### Video Streams
+
+- Can ingest streaming data from millions of smartphones, security cameras, any other sensors
+- Easily links with ML video recognition apps in AWS to process data
+
+### Data Streams
+
+- Accumulates data from millions of application logs: clicks, touch sensors, in-app events
+- Combined with analytical tools, get results in seconds and can export results to S3
+
+---
+
+## AWS Outposts
+
+Some companies maintain on-premises infrastructure along with cloud infrastructure (hybrid).
+
+### Key Features
+
+- **Outposts are "server racks"**: That offer AWS infrastructure, services, APIs to build apps on premises just as you would in the cloud
+- **AWS will do the manual setup**: And manage the "racks"
+- **Essentially**: Like having a mini piece of an AWS data center on premises
+- **However**: You are responsible for physical security of the Outpost "rack"
+
+---
+
+## Key Takeaways
+
+1. CloudFront provides global content delivery through edge locations
+2. Global Accelerator optimizes network paths for better performance
+3. Elastic Beanstalk simplifies application deployment (PaaS)
+4. CloudFormation enables Infrastructure as Code
+5. SQS and SNS provide messaging and notification capabilities
+6. Amplify offers a complete backend-as-a-service solution
+7. Kinesis handles real-time streaming data processing
+8. Outposts brings AWS infrastructure to on-premises locations

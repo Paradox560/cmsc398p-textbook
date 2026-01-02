@@ -1,0 +1,132 @@
+---
+title: Week 2 - Identity and Access Management (IAM)
+description: Learn about IAM users, groups, roles, policies, MFA, and AWS Organizations
+---
+
+# Practical Cloud Computing with AWS
+
+## Week Two
+
+This week focuses on Identity and Access Management (IAM), which is fundamental to securing your AWS infrastructure.
+
+---
+
+## IAM - Identity Access Management
+
+Imagine your AWS account is a university and you are the dean...
+
+### The Analogy
+
+- **You**: You are the AWS account root user which in our scenario would be the "Dean"
+- **AWS Services**: The different AWS services like S3, EC2, and VPCs would be the different buildings on campus
+- **IAM**: The IAM would be the security for the buildings which in this case would be the swipe machines and dorm security
+
+IAM allows you to granularly control the access to your application through delegation of roles, groups, and policies.
+
+---
+
+## IAM Users - The Students
+
+IAM users are almost exactly like the unique ID cards everyone on campus has. They represent a person or application that needs access to interact with your app.
+
+Each IAM user has its own set of username/password and the root credentials are never given to anyone.
+
+> **💡 Critical Idea: Least Privilege Principle**
+>
+> Give each user only the permissions that they need to perform their job, no more!!
+
+---
+
+## IAM Groups - The Departments
+
+IAM Groups are like the departments/clubs at a university. Attach permissions to a group, then all the users within inherit the permissions.
+
+### Key Points
+
+- **Simplifying Management**: Create groups called 'Developers' or 'Teachers' that can hold many users within them and assign permissions to groups
+- **Limitations**: Groups cannot contain other groups
+- **No Credentials**: Groups do not have credentials (username/password), they are just a container of users
+
+---
+
+## IAM Policies - The Rulebook
+
+IAM policies are like the rulebook or handbook that define exactly what actions are allowed. If it is not allowed, then it is implicitly denied.
+
+### Policy Structure
+
+Generally written in JSON format, they specify:
+
+- **Who** (Principal): The user, group, or role the policy applies to
+- **What** (Action): The specific actions allowed or denied
+- **On What** (Resource): The specific AWS resources (identified by Amazon Resource Name - ARN)
+- **Under What Conditions** (Optional): Conditions that must be met
+
+They define whether or not to allow or deny an action which can range from any service on AWS. Resource refers to Amazon Resource Name (ARN) which identifies groups, objects, etc. within the cloud environment.
+
+### Types of Policies
+
+- **AWS Managed Policies**: Pre-defined policies by AWS
+- **Inline Policies**: Policies embedded into a single user, group, or role
+- **Identity Based Policies**: Directly assigned to users, groups, or roles
+- **Customer Managed Policy**: Policies that you create
+
+---
+
+## IAM Best Practices
+
+1. **Never Use the Root User**: Use IAM users instead for day-to-day operations
+2. **Apply the Principle of Least Privilege**: Only grant the necessary permissions. Avoid `*` (all actions) and `*` (all resources) unless absolutely required for administrative roles, and even then, be cautious.
+3. **Use IAM Groups**: Simplify permission management for multiple users
+4. **Enable MFA for Everyone**: Especially for users with elevated privileges
+5. **Use Strong Password Policies**: Configure a password policy for your IAM users (e.g., minimum length, complexity requirements, password rotation)
+6. **Regularly Review Permissions**: Periodically check who has access to what. AWS provides tools like IAM Access Analyzer for this
+7. **Understand Policy Evaluation Logic**: Remember that an explicit Deny always overrides an Allow. If multiple policies apply, AWS evaluates them to determine the final permission
+
+---
+
+## AWS Organizations: The Fleet
+
+### Overview
+
+If one AWS account was a university, then AWS Organizations is like a university system with multiple campuses. It allows you to centrally manage multiple AWS accounts.
+
+### Key Features
+
+- **Centralized Management**: Manage billing, security, and compliance across multiple AWS accounts
+- **Service Control Policies (SCPs)**: Apply policies that control which services and actions are available in member accounts
+- **Consolidated Billing**: Combine usage from all accounts to get volume discounts
+- **Organizational Units (OUs)**: Organize accounts into groups for easier management
+
+---
+
+## Multi-Factor Authentication (MFA)
+
+MFA adds an extra layer of security by requiring users to provide two or more verification factors:
+
+- **Something you know**: Password
+- **Something you have**: Physical device (like a smartphone or hardware token)
+- **Something you are**: Biometric data
+
+### Why Enable MFA?
+
+- Protects against password theft
+- Required for sensitive operations
+- Best practice for all users, especially those with elevated privileges
+
+---
+
+## Next Class Preview
+
+In Week 3, we'll continue building on these security foundations and explore more AWS services.
+
+---
+
+## Key Takeaways
+
+1. IAM provides granular control over who can access what in your AWS account
+2. Users, groups, and roles are the building blocks of IAM
+3. Policies define permissions in JSON format
+4. Always follow the principle of least privilege
+5. Enable MFA for enhanced security
+6. AWS Organizations helps manage multiple AWS accounts centrally

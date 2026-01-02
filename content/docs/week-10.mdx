@@ -1,0 +1,139 @@
+---
+title: Week 10 - AWS Security Services
+description: Comprehensive overview of AWS security tools including GuardDuty, Inspector, Detective, Security Hub, Macie, and more
+---
+
+# Practical Cloud Computing with AWS
+
+## Week Ten
+
+This week covers AWS security services that help protect your infrastructure and data.
+
+---
+
+## AWS GuardDuty
+
+GuardDuty is a threat detection service that continuously monitors for malicious activity and unauthorized behavior to protect your AWS accounts, workloads, and data stored in S3.
+
+### Key Features
+
+- **Continuous Monitoring**: Uses machine learning, anomaly detection, and integrated threat intelligence
+- **Multiple Data Sources**: Analyzes events from various AWS services
+- **Threat Detection**: Identifies potential security issues automatically
+
+### Example Inputs of Data
+
+- **CloudTrail Events Logs**: Unusual API calls, unauthorized deployments
+- **VPC Flow Logs**: Unusual internal traffic, unusual IP addresses
+- **DNS Logs**: Compromised EC2 instances sending embedded data within DNS queries
+- **Others**: Lambda, S3 Data Events, etc.
+
+---
+
+## AWS Inspector & Detective
+
+### AWS Inspector
+
+Inspector allows for automated security assessments of EC2 instances, container images, and Lambda functions.
+
+**Features:**
+
+- Can also do continuous scanning of the infrastructure only when needed for package vulnerabilities
+- Attaches a risk score for prioritization of issues within the security
+- Sends data to Event Bridge
+
+### AWS Detective
+
+Detective analyzes data to determine root cause of security issue or suspicious activity using ML and graphs.
+
+**Features:**
+
+- Automatically takes data from VPC flow logs, CloudTrail, GuardDuty
+- Produces visualizations with context to help you trace the root issue
+
+---
+
+## AWS Security Hub & Macie
+
+### Security Hub
+
+Central hub to manage security across several AWS accounts and automate security checks.
+
+**Features:**
+
+- Has integrated dashboards showing current security compliance status across all the services
+- Aggregates findings from multiple AWS security services
+- Provides a comprehensive view of your security posture
+
+### Macie
+
+Similar to GuardDuty and Detective, AWS Macie uses ML to discover and protect sensitive data stored in S3 buckets (data security).
+
+**Features:**
+
+- Automatically discovers sensitive data
+- Provides data security insights
+- Helps with compliance requirements
+
+---
+
+## AWS Certificate and Secrets Manager
+
+### Certificate Manager
+
+Used to easily provision, manage, and deploy (public & private) SSL/TLS certificates.
+
+**Use Cases:**
+
+- Used to provide encryption for data in-transit or (in-flight) for websites (HTTPS)
+- Automatically renews certificates
+- Free for public certificates
+
+### Secrets Manager
+
+Automatically generates secrets (passwords) on rotation on a set schedule (uses Lambda to rotate).
+
+**Features:**
+
+- Can be integrated with AWS RDS (Aurora, PostgreSQL, Oracle)
+- Automatically rotates credentials
+- Stores secrets securely with encryption
+
+---
+
+## AWS Artifact and Config
+
+### AWS Config
+
+Records and audits your AWS infrastructure for compliance by recording configurations and changes to resources over time.
+
+**Features:**
+
+- Continuous monitoring of resource configurations
+- Compliance checking
+- Configuration history and change tracking
+
+### AWS Artifact
+
+Portal that provides AWS customers with on-demand access to AWS compliance documentation and agreements.
+
+**Artifact Reports:**
+
+- Allows you to download security & compliance documentation from 3rd party auditors
+- Examples: AWS ISO certs, Payment Card Industry (PCI), System and Organization Control (SOC) reports
+
+**Artifact Agreements:**
+
+- Allows you to track status of AWS agreements
+- Examples: Business Associate Addendum (BAA) or Health Insurance Portability and Accountability Act (HIPAA) for an individual account
+
+---
+
+## Key Takeaways
+
+1. GuardDuty provides continuous threat detection across your AWS environment
+2. Inspector and Detective help with security assessments and root cause analysis
+3. Security Hub provides a centralized view of security across accounts
+4. Macie protects sensitive data in S3
+5. Certificate Manager and Secrets Manager help with encryption and credential management
+6. Config and Artifact support compliance and auditing requirements
